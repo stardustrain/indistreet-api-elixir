@@ -7,6 +7,10 @@ defmodule IndistreetApiWeb.Router do
 
   scope "/api", IndistreetApiWeb do
     pipe_through :api
+
+    scope "/v1", V1 do
+      resources "/albums", AlbumController, only: [:index, :show]
+    end
   end
 
   # Enables LiveDashboard only for development
