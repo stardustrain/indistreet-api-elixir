@@ -11,6 +11,10 @@ defmodule IndistreetApiWeb.Router do
     scope "/v1", V1 do
       resources "/albums", AlbumController, only: [:index, :show]
     end
+
+    scope "/admin", Admin do
+      resources "/albums", AlbumController, except: [:new, :edit]
+    end
   end
 
   # Enables LiveDashboard only for development

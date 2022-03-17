@@ -10,4 +10,10 @@ defmodule IndistreetApi.Music do
   def get_product!(id) do
     Repo.one!(from album in Album, where: album.id == ^id)
   end
+
+  def create_album(attrs \\ %{}) do
+    %Album{}
+    |> Album.changeset(attrs)
+    |> Repo.insert()
+  end
 end
