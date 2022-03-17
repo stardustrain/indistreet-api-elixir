@@ -1,7 +1,18 @@
 defmodule Utils.Pagination do
+  @moduledoc """
+  Pagnination utils.
+  """
+
   @default_option %{page: 1, offset: 10}
 
-  @moduledoc false
+  @doc """
+  Returns pagination option.
+
+  - Examples
+
+    iex> Utils.Pagination.get_pagination_option(%{})
+    %{page: 1, offset: 10}
+  """
   def get_pagination_option(option) do
     merged_option = merge_option(option)
     Map.keys(merged_option)
