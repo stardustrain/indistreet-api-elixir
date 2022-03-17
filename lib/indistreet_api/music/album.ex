@@ -1,8 +1,7 @@
-defmodule IndistreetApi.Album do
+defmodule IndistreetApi.Music.Album do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query, warn: false
-  alias IndistreetApi.{Repo, Album}
 
   schema "albums" do
     field :name, :string
@@ -10,14 +9,6 @@ defmodule IndistreetApi.Album do
     field :description, :string
 
     timestamps()
-  end
-
-  def list_albums do
-    Repo.all(Album)
-  end
-
-  def get_product!(id) do
-    Repo.one!(from album in Album, where: album.id == ^id)
   end
 
   @doc false
