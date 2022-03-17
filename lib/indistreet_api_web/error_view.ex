@@ -1,4 +1,4 @@
-defmodule IndistreetApiWeb.V1.ErrorView do
+defmodule IndistreetApiWeb.ErrorView do
   use IndistreetApiWeb, :view
 
   # If you want to customize a particular status code
