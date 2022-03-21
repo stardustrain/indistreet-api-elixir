@@ -71,6 +71,12 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/plug_cowboy" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/plug" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/credo" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/file_system" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/bunt" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/credo" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/file_system" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/bunt" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="phoenix" level="project" />
@@ -129,5 +135,8 @@
     <orderEntry type="library" name="ex_sqlean" level="project" />
     <orderEntry type="library" name="elixir_make" level="project" />
     <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="file_system" level="project" />
+    <orderEntry type="library" name="bunt" level="project" />
+    <orderEntry type="library" name="inch_ex" level="project" />
   </component>
 </module>

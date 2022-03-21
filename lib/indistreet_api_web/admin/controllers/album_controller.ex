@@ -4,10 +4,18 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
   alias IndistreetApi.Music
   alias IndistreetApi.Music.Album
 
-  def create(conn, %{album: album_params}) do
+  def create(conn, %{"album" => album_params}) do
     with {:ok, %Album{} = album} <- Music.create_album(album_params) do
       conn
       |> put_status(:created)
+      |> render("show.json", album: album)
+    end
+  end
+
+  def update(conn, %{"id" => id, "album" => album_params}) do
+    album = Music.get_product!(id)
+    with {:ok, %Album{} = album} <- Music.update_album(album, album_params) do
+      conn
       |> render("show.json", album: album)
     end
   end

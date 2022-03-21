@@ -1,4 +1,8 @@
 defmodule IndistreetApi.Music do
+  @moduledoc """
+  The Music context
+  """
+
   import Ecto.Query
   alias IndistreetApi.Repo
   alias IndistreetApi.Music.Album
@@ -15,5 +19,11 @@ defmodule IndistreetApi.Music do
     %Album{}
     |> Album.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_album(%Album{} = album, attrs \\ %{}) do
+    album
+    |> Album.changeset(attrs)
+    |> Repo.update()
   end
 end

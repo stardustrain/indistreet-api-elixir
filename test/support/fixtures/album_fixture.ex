@@ -8,7 +8,7 @@ defmodule IndistreetApi.AlbumFixture do
   Generate a one of album
   """
   def album_fixture(attrs \\ %{}) do
-    {:ok, _album} =
+    {:ok, album} =
       attrs
       |> Enum.into(%{
         name: "Test album name",
@@ -16,12 +16,13 @@ defmodule IndistreetApi.AlbumFixture do
         description: "Test album description"
       })
       |> IndistreetApi.Music.create_album()
+
+    album
   end
 
   def multiple_album_fixtures(count \\ 10) do
     for _x <- 1..count do
-      {:ok, album} = album_fixture()
-      album
+      album_fixture()
     end
   end
 end

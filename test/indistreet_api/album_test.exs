@@ -31,6 +31,15 @@ defmodule IndistreetApi.AlbumTest do
       assert {:error, %Ecto.Changeset{}} = Music.create_album(%{name: 111, album_type: "SINGLE", description: ""})
       assert {:error, %Ecto.Changeset{}} = Music.create_album(%{name: 111, album_type: "Wrong album type"})
     end
+
+    test "update_album/2 update a album with valid data" do
+      created_album = album_fixture()
+      update_attrs = %{name: "Update name", album_type: "EP", description: "Update description"}
+      assert {:ok, %Album{} = album} = Music.update_album(created_album, update_attrs)
+      assert album.name == "Update name"
+      assert album.album_type == "EP"
+      assert album.description == "Update description"
+    end
   end
 
 end

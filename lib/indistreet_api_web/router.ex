@@ -8,11 +8,11 @@ defmodule IndistreetApiWeb.Router do
   scope "/api", IndistreetApiWeb do
     pipe_through :api
 
-    scope "/v1", V1 do
+    scope "/v1", V1, as: "v1" do
       resources "/albums", AlbumController, only: [:index, :show]
     end
 
-    scope "/admin", Admin do
+    scope "/admin", Admin, as: "admin" do
       resources "/albums", AlbumController, except: [:new, :edit]
     end
   end
