@@ -23,6 +23,15 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
          "updated_at" => iso_date_time()
       } == json_response(conn, 201)["data"]
     end
+
+    test "should render 400 error when data in invalid", %{conn: conn} do
+      conn = post(
+        conn,
+        Routes.admin_album_path(conn, :create),
+        %{album: %{}}
+      )
+      assert json_response(conn, 400)["errors"] != %{}
+    end
   end
 
   describe "update album" do
@@ -42,6 +51,15 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
          "name" => "Update name",
          "updated_at" => iso_date_time()
        } == json_response(conn, 200)["data"]
+    end
+
+    test "should render 422 error when data in invalid", %{conn: conn, album: album} do
+      conn = patch(
+        conn,
+        Routes.admin_album_path(conn, :update, album),
+        %{album: %{album_type: "WRONG_TYPE"}}
+      )
+      assert json_response(conn, 422)["errors"] != %{}
     end
   end
 
