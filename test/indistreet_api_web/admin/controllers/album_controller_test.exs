@@ -20,7 +20,8 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
          "id" => 1,
          "inserted_at" => iso_date_time(),
          "name" => "New name",
-         "updated_at" => iso_date_time()
+         "updated_at" => iso_date_time(),
+         "songs" => []
       } == json_response(conn, 201)["data"]
     end
 

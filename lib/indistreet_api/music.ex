@@ -9,12 +9,14 @@ defmodule IndistreetApi.Music do
 
   def list_albums(%{page: page, offset: offset} = %{page: page, offset: offset}) do
     albums = Repo.all(Album |> limit(^offset) |> offset(^((page - 1) * offset)))
+             |> Repo.preload(:songs)
     count = Repo.aggregate(Album, :count)
     %{albums: albums, count: count}
   end
 
   def get_product!(id) do
     Repo.get!(Album, id)
+    |> Repo.preload([:songs])
   end
 
   def create_album(attrs \\ %{}) do
