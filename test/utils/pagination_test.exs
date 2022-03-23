@@ -19,4 +19,8 @@ defmodule PaginationTest do
   test "should return received option when does not need default options." do
     assert get_pagination_option(%{page: 4, offset: 15}) == %{page: 4, offset: 15}
   end
+
+  test "should return %{string, integer} map." do
+    assert get_pagination_option(%{page: "1", offset: "10"}) == %{page: 1, offset: 10}
+  end
 end

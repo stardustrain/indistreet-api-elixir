@@ -14,11 +14,9 @@ defmodule Utils.Pagination do
     %{page: 1, offset: 10}
   """
   def get_pagination_option(option) do
-    merged_option = merge_option(option)
-    Map.keys(merged_option)
-      |> Enum.each(fn key -> Map.update!(merged_option, key, fn val -> parse_integer(val) end) end)
-
-    merged_option
+    merge_option(option)
+    |> Map.to_list
+    |> Enum.reduce(%{}, fn ({key, val}, acc) -> Map.put_new(acc, key, parse_integer(val)) end)
   end
 
   defp merge_option(option) do
