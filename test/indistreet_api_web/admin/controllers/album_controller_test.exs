@@ -61,6 +61,29 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
     end
   end
 
+  describe "retrieve album" do
+    setup [:create_album]
+
+    test "should render album with album id", %{conn: conn} do
+      conn = get(
+        conn,
+        Routes.admin_album_path(conn, :show, "1")
+      )
+
+      data = json_response(conn, 200)["data"]
+      assert data["id"] == 1
+    end
+
+    test "should render 404 when does not exist album", %{conn: conn} do
+      assert_error_sent 404, fn ->
+        get(
+          conn,
+          Routes.admin_album_path(conn, :show, "100")
+        )
+      end
+    end
+  end
+
   describe "update album" do
     setup [:create_album]
 

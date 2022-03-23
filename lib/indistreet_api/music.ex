@@ -14,7 +14,7 @@ defmodule IndistreetApi.Music do
   end
 
   def get_product!(id) do
-    Repo.one!(from album in Album, where: album.id == ^id)
+    Repo.get!(Album, id)
   end
 
   def create_album(attrs \\ %{}) do
