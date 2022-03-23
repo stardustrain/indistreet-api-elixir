@@ -40,6 +40,12 @@ defmodule IndistreetApi.AlbumTest do
       assert album.album_type == "EP"
       assert album.description == "Update description"
     end
+
+    test "delete_album/1 delete a album when exist album" do
+      album = album_fixture()
+      
+      assert {:ok, %Album{} = _album} = Music.delete_album(album)
+    end
   end
 
 end

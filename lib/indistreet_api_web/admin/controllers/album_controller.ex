@@ -39,4 +39,14 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
       {:error, %Ecto.Changeset{}} -> {:error, :unprocessable_entity}
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    album = Music.get_product!(id)
+    with {:ok, %Album{} = album} <- Music.delete_album(album) do
+      conn
+      |> render("show.json", album: album)
+    else
+      {:error, %Ecto.Changeset{}} -> {:error, :bad_request}
+    end
+  end
 end

@@ -64,21 +64,20 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
   describe "retrieve album" do
     setup [:create_album]
 
-    test "should render album with album id", %{conn: conn} do
+    test "should render album with album id", %{conn: conn, album: album} do
       conn = get(
         conn,
         Routes.admin_album_path(conn, :show, "1")
       )
 
-      data = json_response(conn, 200)["data"]
-      assert data["id"] == 1
+      assert json_response(conn, 200)["data"]["id"] == Map.get(album, :id)
     end
 
     test "should render 404 when does not exist album", %{conn: conn} do
       assert_error_sent 404, fn ->
         get(
           conn,
-          Routes.admin_album_path(conn, :show, "100")
+          Routes.admin_album_path(conn, :show, "-1")
         )
       end
     end
@@ -107,6 +106,28 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         %{album: %{album_type: "WRONG_TYPE"}}
       )
       assert json_response(conn, 422)["errors"] != %{}
+    end
+  end
+
+  describe "delete album" do
+    setup [:create_album]
+
+    test "should render deleted album when exist album", %{conn: conn, album: album} do
+      conn = delete(
+        conn,
+        Routes.admin_album_path(conn, :delete, "1")
+      )
+
+      assert json_response(conn, 200)["data"]["id"] == Map.get(album, :id)
+    end
+
+    test "should render 404 error when does not exist album", %{conn: conn} do
+      assert_error_sent 404, fn ->
+        delete(
+          conn,
+          Routes.admin_album_path(conn, :delete, "-1")
+        )
+      end
     end
   end
 

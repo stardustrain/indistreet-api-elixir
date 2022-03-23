@@ -28,4 +28,8 @@ defmodule IndistreetApi.Music do
     |> Album.changeset(attrs)
     |> Repo.update()
   end
+
+  def delete_album(%Album{} = album) do
+    Repo.delete(album)
+  end
 end
