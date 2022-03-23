@@ -10,10 +10,10 @@ defmodule IndistreetApi.AlbumTest do
     test "list_albums/1 returns all albums" do
       albums = multiple_album_fixtures()
 
-      assert Music.list_albums(%{page: 1, offset: 10}) == albums
-      assert Music.list_albums(%{page: 1, offset: 5}) == Enum.take(albums, 5)
-      assert Music.list_albums(%{page: 2, offset: 5}) == Enum.take(albums, -5)
-      assert Music.list_albums(%{page: 3, offset: 10}) == []
+      assert Music.list_albums(%{page: 1, offset: 10}) == %{albums: albums, count: 10}
+      assert Music.list_albums(%{page: 1, offset: 5}) == %{albums: Enum.take(albums, 5), count: 10}
+      assert Music.list_albums(%{page: 2, offset: 5}) == %{albums: Enum.take(albums, -5), count: 10}
+      assert Music.list_albums(%{page: 3, offset: 10}) == %{albums: [], count: 10}
     end
 
     test "create_album/1 creates a album with valid data" do

@@ -8,7 +8,9 @@ defmodule IndistreetApi.Music do
   alias IndistreetApi.Music.Album
 
   def list_albums(%{page: page, offset: offset} = %{page: page, offset: offset}) do
-    Repo.all(Album |> limit(^offset) |> offset(^((page - 1) * offset)))
+    albums = Repo.all(Album |> limit(^offset) |> offset(^((page - 1) * offset)))
+    count = Repo.aggregate(Album, :count)
+    %{albums: albums, count: count}
   end
 
   def get_product!(id) do

@@ -34,6 +34,33 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
     end
   end
 
+  describe "listing albums" do
+    setup [:create_many_album]
+
+    test "should render all albums with pagination option", %{conn: conn, albums: albums} do
+      conn = get(
+        conn,
+        Routes.admin_album_path(conn, :index),
+        %{}
+      )
+      data = json_response(conn, 200)["data"]
+      assert data["count"] == 10
+      assert get_album_name(data["albums"]) == get_album_name(albums)
+    end
+
+    test "should render empty list with pagination option", %{conn: conn} do
+      conn = get(
+        conn,
+        Routes.admin_album_path(conn, :index),
+        %{"page" => 2, "offset" => 10}
+      )
+
+      data = json_response(conn, 200)["data"]
+      assert data["count"] == 10
+      assert data["albums"] == []
+    end
+  end
+
   describe "update album" do
     setup [:create_album]
 
@@ -43,14 +70,11 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         Routes.admin_album_path(conn, :update, album),
         %{album: %{name: "Update name", album_type: "EP", description: "Update description"}}
       )
-      assert %{
-         "album_type" => "EP",
-         "description" => "Update description",
-         "id" => 1,
-         "inserted_at" => iso_date_time(),
-         "name" => "Update name",
-         "updated_at" => iso_date_time()
-       } == json_response(conn, 200)["data"]
+
+      updated_album = json_response(conn, 200)["data"]
+
+      assert updated_album["name"] == "Update name"
+      assert updated_album["description"] == "Update description"
     end
 
     test "should render 422 error when data in invalid", %{conn: conn, album: album} do
@@ -68,9 +92,27 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
     %{album: album}
   end
 
+  defp create_many_album(_) do
+    albums = multiple_album_fixtures()
+    %{albums: albums}
+  end
+
   defp iso_date_time() do
     DateTime.now!("Etc/UTC")
     |> DateTime.truncate(:second)
     |> DateTime.to_iso8601
+  end
+
+  defp get_album_name(albums) do
+    {:ok, album} = Enum.fetch(albums, 1)
+    case album do
+      album when is_struct(album) ->
+        album
+        |> Map.from_struct
+        |> Map.get(:name)
+      _ ->
+        album
+        |> Map.get("name")
+    end
   end
 end
