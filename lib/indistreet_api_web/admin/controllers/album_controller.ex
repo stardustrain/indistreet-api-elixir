@@ -25,13 +25,13 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
   end
 
   def show(conn, %{"id" => id})do
-    album = Music.get_product!(id)
+    album = Music.get_album!(id)
     conn
     |> render("show.json", album: album)
   end
   
   def update(conn, %{"id" => id, "album" => album_params}) do
-    album = Music.get_product!(id)
+    album = Music.get_album!(id)
     with {:ok, %Album{} = album} <- Music.update_album(album, album_params) do
       conn
       |> render("show.json", album: album)
@@ -41,7 +41,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
   end
 
   def delete(conn, %{"id" => id}) do
-    album = Music.get_product!(id)
+    album = Music.get_album!(id)
     with {:ok, %Album{} = album} <- Music.delete_album(album) do
       conn
       |> render("show.json", album: album)

@@ -20,6 +20,9 @@ defmodule IndistreetApi.AlbumFixture do
     album
   end
 
+  @doc """
+  Generate a multiple albums. If no argument is passed, 10 albums are created.
+  """
   def multiple_album_fixtures(count \\ 10) do
     for _x <- 1..count do
       album_fixture()

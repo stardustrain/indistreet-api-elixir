@@ -22,7 +22,7 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
          "name" => "New name",
          "updated_at" => iso_date_time(),
          "songs" => []
-      } == json_response(conn, 201)["data"]
+      } == json_response(conn, 201)
     end
 
     test "should render 400 error when data in invalid", %{conn: conn} do
@@ -44,9 +44,9 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         Routes.admin_album_path(conn, :index),
         %{}
       )
-      data = json_response(conn, 200)["data"]
-      assert data["count"] == 10
-      assert get_album_name(data["albums"]) == get_album_name(albums)
+      response = json_response(conn, 200)
+      assert response["count"] == 10
+      assert get_album_name(response["albums"]) == get_album_name(albums)
     end
 
     test "should render empty list with pagination option", %{conn: conn} do
@@ -56,9 +56,9 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         %{"page" => 2, "offset" => 10}
       )
 
-      data = json_response(conn, 200)["data"]
-      assert data["count"] == 10
-      assert data["albums"] == []
+      response = json_response(conn, 200)
+      assert response["count"] == 10
+      assert response["albums"] == []
     end
   end
 
@@ -71,7 +71,7 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         Routes.admin_album_path(conn, :show, "1")
       )
 
-      assert json_response(conn, 200)["data"]["id"] == Map.get(album, :id)
+      assert json_response(conn, 200)["id"] == Map.get(album, :id)
     end
 
     test "should render 404 when does not exist album", %{conn: conn} do
@@ -94,7 +94,7 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         %{album: %{name: "Update name", album_type: "EP", description: "Update description"}}
       )
 
-      updated_album = json_response(conn, 200)["data"]
+      updated_album = json_response(conn, 200)
 
       assert updated_album["name"] == "Update name"
       assert updated_album["description"] == "Update description"
@@ -119,7 +119,7 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
         Routes.admin_album_path(conn, :delete, "1")
       )
 
-      assert json_response(conn, 200)["data"]["id"] == Map.get(album, :id)
+      assert json_response(conn, 200)["id"] == Map.get(album, :id)
     end
 
     test "should render 404 error when does not exist album", %{conn: conn} do

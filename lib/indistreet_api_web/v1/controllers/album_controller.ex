@@ -10,7 +10,7 @@ defmodule IndistreetApiWeb.V1.AlbumController do
   end
 
   def show(conn, %{"id" => id}) do
-    album = Music.get_product!(id)
+    album = Music.get_album!(id)
     render(conn, "show.json", album: album)
   end
 end
