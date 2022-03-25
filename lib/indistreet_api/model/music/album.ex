@@ -1,8 +1,8 @@
-defmodule IndistreetApi.Music.Album do
+defmodule IndistreetApi.Model.Music.Album do
   @moduledoc false
 
   use IndistreetApi.Schema
-  alias IndistreetApi.Music.Song
+  alias IndistreetApi.Model.Music.Song
 
   @album_types ["SINGLE", "EP", "MINI_ALBUM", "FULL_ALBUM", "OST"]
 
@@ -21,8 +21,8 @@ defmodule IndistreetApi.Music.Album do
     album
     |> Repo.preload(:songs)
     |> cast(attrs, [:name, :album_type, :description])
-    |> cast_assoc(:songs)
     |> validate_required([:name, :album_type])
     |> validate_inclusion(:album_type, @album_types)
+    |> cast_assoc(:songs)
   end
 end

@@ -1,10 +1,10 @@
-defmodule IndistreetApi.SongTest do
+defmodule IndistreetApi.Admin.SongTest do
   use IndistreetApi.DataCase
 
-  alias IndistreetApi.Music
+  alias IndistreetApi.Admin.Music
 
   describe "songs" do
-    alias IndistreetApi.Music.Song
+    alias IndistreetApi.Model.Music.Song
 
     import IndistreetApi.AlbumFixture
     import IndistreetApi.SongFixture

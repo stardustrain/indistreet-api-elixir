@@ -34,8 +34,8 @@ defmodule IndistreetApi.SongFixture do
             |> Enum.with_index
             |> Enum.reduce(Ecto.Multi.new(), fn ({attrs, index}, multi) ->
               album_id = if rem(index, 2) === 0, do: first_album.id, else: second_album.id
-              changeset = %IndistreetApi.Music.Song{album_id: album_id}
-              |> IndistreetApi.Music.Song.changeset(attrs)
+              changeset = %IndistreetApi.Model.Music.Song{album_id: album_id}
+              |> IndistreetApi.Model.Music.Song.changeset(attrs)
 
               Ecto.Multi.insert(multi, {:song, index}, changeset)
             end)

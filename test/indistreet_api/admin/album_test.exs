@@ -1,10 +1,10 @@
-defmodule IndistreetApi.AlbumTest do
+defmodule IndistreetApi.Admin.AlbumTest do
   use IndistreetApi.DataCase
-  
-  alias IndistreetApi.Music
+
+  alias IndistreetApi.Admin.Music
 
   describe "albums" do
-    alias IndistreetApi.Music.Album
+    alias IndistreetApi.Model.Music.Album
     import IndistreetApi.AlbumFixture
 
     test "list_albums/1 returns all albums" do
@@ -43,7 +43,7 @@ defmodule IndistreetApi.AlbumTest do
 
     test "delete_album/1 delete a album when exist album" do
       album = album_fixture()
-      
+
       assert {:ok, %Album{} = _album} = Music.delete_album(album)
     end
   end

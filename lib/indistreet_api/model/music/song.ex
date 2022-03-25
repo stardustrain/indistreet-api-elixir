@@ -1,10 +1,10 @@
-defmodule IndistreetApi.Music.Song do
+defmodule IndistreetApi.Model.Music.Song do
   @moduledoc """
 
   """
 
   use IndistreetApi.Schema
-  alias IndistreetApi.Music.Album
+  alias IndistreetApi.Model.Music.Album
 
   @derive {Jason.Encoder, except: [:__meta__]}
   schema "songs" do

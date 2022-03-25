@@ -15,7 +15,7 @@ defmodule IndistreetApi.AlbumFixture do
         album_type: "SINGLE",
         description: "Test album description"
       })
-      |> IndistreetApi.Music.create_album()
+      |> IndistreetApi.Admin.Music.create_album()
 
     album
   end

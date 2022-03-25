@@ -1,7 +1,7 @@
 defmodule IndistreetApiWeb.V1.AlbumController do
   use IndistreetApiWeb, :controller
   alias Utils.Pagination
-  alias IndistreetApi.Music
+  alias IndistreetApi.V1.Music
 
   def index(conn, params) do
     option = Pagination.get_pagination_option(%{page: params["page"], offset: params["offset"]})

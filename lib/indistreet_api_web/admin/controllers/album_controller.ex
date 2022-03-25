@@ -1,8 +1,8 @@
 defmodule IndistreetApiWeb.Admin.AlbumController do
   @moduledoc false
   use IndistreetApiWeb, :controller
-  alias IndistreetApi.Music
-  alias IndistreetApi.Music.Album
+  alias IndistreetApi.Admin.Music
+  alias IndistreetApi.Model.Music.Album
   alias Utils.Pagination
 
   action_fallback IndistreetApiWeb.Admin.FallbackController
@@ -29,7 +29,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
     conn
     |> render("show.json", album: album)
   end
-  
+
   def update(conn, %{"id" => id, "album" => album_params}) do
     album = Music.get_album!(id)
     with {:ok, %Album{} = album} <- Music.update_album(album, album_params) do
