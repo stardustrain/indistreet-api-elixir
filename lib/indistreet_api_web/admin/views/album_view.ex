@@ -7,8 +7,7 @@ defmodule IndistreetApiWeb.Admin.AlbumView do
 
   def render("show.json", %{album: album}) do
     songs = %{songs: render_many(album.songs, __MODULE__, "song.json", as: :song)}
-    data = Map.merge(album, songs)
-    data
+    Map.merge(album, songs)
   end
 
   def render("song.json", %{song: song}) do

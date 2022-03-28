@@ -24,7 +24,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
     |> render("index.json", albums_data: albums_data)
   end
 
-  def show(conn, %{"id" => id})do
+  def show(conn, %{"id" => id}) do
     album = Music.get_album!(id)
     conn
     |> render("show.json", album: album)
