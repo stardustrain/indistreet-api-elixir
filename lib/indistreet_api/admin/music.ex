@@ -71,4 +71,12 @@ defmodule IndistreetApi.Admin.Music do
 
     %{songs: songs, count: count}
   end
+
+  def get_song!(id) do
+    Song
+    |> where([song], song.id == ^id)
+    |> join(:left, [song], album in assoc(song, :album))
+    |> preload([:album])
+    |> Repo.one!
+  end
 end

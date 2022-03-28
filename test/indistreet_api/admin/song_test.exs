@@ -25,6 +25,14 @@ defmodule IndistreetApi.Admin.SongTest do
       assert Music.list_song(%{page: 1, offset: 10, album_id: 1}).songs |> length === 5
       assert Music.list_song(%{page: 2, offset: 10}) === %{songs: [], count: 10}
     end
+
+    test "get_song!/1 return song with id" do
+      song = song_fixture()
+
+      assert Music.get_song!(1).id === song.id
+      assert Music.get_song!(1).name === song.name
+      assert Music.get_song!(1).album.id === song.album.id
+    end
   end
 
 end

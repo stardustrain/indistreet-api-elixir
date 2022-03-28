@@ -14,6 +14,7 @@ defmodule IndistreetApiWeb.Router do
 
     scope "/admin", Admin, as: "admin" do
       resources "/albums", AlbumController, except: [:new, :edit]
+      resources "/songs", SongController, except: [:new, :edit]
     end
   end
 
