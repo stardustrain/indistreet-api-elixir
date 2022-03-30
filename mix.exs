@@ -20,7 +20,7 @@ defmodule IndistreetApi.MixProject do
   def application do
     [
       mod: {IndistreetApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :guardian]
     ]
   end
 
@@ -44,7 +44,10 @@ defmodule IndistreetApi.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:guardian, "~> 2.0"},
+      {:comeonin, "~> 5.3"},
+      {:pbkdf2_elixir, "~> 2.0"}
     ]
   end
 
