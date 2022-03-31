@@ -7,8 +7,8 @@ defmodule IndistreetApi.Model.Account.User do
   schema "users" do
     field :email, :string
     field :password_hash, :string
-    field :is_admin, :boolean
-    field :is_super_user, :boolean
+    field :is_admin, :boolean, default: false
+    field :is_super_user, :boolean, default: false
 
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
@@ -23,6 +23,7 @@ defmodule IndistreetApi.Model.Account.User do
     |> unique_constraint(:email)
     |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)
+    |> put_password_hash
   end
 
   defp put_password_hash(changeset) do
