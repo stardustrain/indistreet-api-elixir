@@ -8,8 +8,8 @@ defmodule IndistreetApi.Repo.Migrations.AddUsers do
       add :is_admin, :boolean
       add :is_super_user, :boolean
       timestamps()
-
-      unique_index(:users, [:email], unique: true)
     end
+
+    create unique_index(:users, [:email])
   end
 end
