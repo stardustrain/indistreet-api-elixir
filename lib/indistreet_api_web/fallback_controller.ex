@@ -1,4 +1,4 @@
-defmodule IndistreetApiWeb.Admin.FallbackController do
+defmodule IndistreetApiWeb.FallbackController do
   @moduledoc false
 
   use Phoenix.Controller

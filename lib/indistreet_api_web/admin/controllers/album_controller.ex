@@ -5,7 +5,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
   alias IndistreetApi.Model.Music.Album
   alias Utils.Pagination
 
-  action_fallback IndistreetApiWeb.Admin.FallbackController
+  action_fallback IndistreetApiWeb.FallbackController
 
   def create(conn, %{"album" => album_params}) do
     with {:ok, %Album{} = album} <- Music.create_album(album_params) do

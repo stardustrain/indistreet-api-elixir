@@ -3,7 +3,7 @@ defmodule IndistreetApiWeb.Admin.SongController do
   use IndistreetApiWeb, :controller
   alias IndistreetApi.Admin.Music
 
-  action_fallback IndistreetApiWeb.Admin.FallbackController
+  action_fallback IndistreetApiWeb.FallbackController
 
   def show(conn, %{"id" => id}) do
     song = Music.get_song!(id)
