@@ -12,4 +12,8 @@ defmodule IndistreetApiWeb.V1.UserController do
       |> render("signin.json", token: token)
     end
   end
+
+  def signup(conn, %{"email" => email, "password" => password}) do
+    
+  end
 end

@@ -15,12 +15,13 @@ defmodule IndistreetApiWeb.Router do
     scope "/v1", V1, as: "v1" do
       resources "/albums", AlbumController, only: [:index, :show]
       post "/signin", UserController, :signin
+      post "/signup", UserController, :signup
     end
 
     scope "/admin", Admin, as: "admin" do
-      if Mix.env() !== :test do
-        pipe_through [:authentication]
-      end
+#      if Mix.env() !== :test do
+#        pipe_through [:authentication]
+#      end
 
       resources "/albums", AlbumController, except: [:new, :edit]
       resources "/songs", SongController, except: [:new, :edit]
