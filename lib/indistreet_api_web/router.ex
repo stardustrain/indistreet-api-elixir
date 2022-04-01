@@ -14,6 +14,7 @@ defmodule IndistreetApiWeb.Router do
 
     scope "/v1", V1, as: "v1" do
       resources "/albums", AlbumController, only: [:index, :show]
+      post "/signin", UserController, :signin
     end
 
     scope "/admin", Admin, as: "admin" do

@@ -11,6 +11,10 @@ import Config
 # before starting your production server.
 config :indistreet_api, IndistreetApiWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :indistreet_api, IndistreetApi.Guardian,
+       issuer: "indistreet_api",
+       secret_key: System.get_env("SECRET_KEY")
+
 # Do not print debug messages in production
 config :logger, level: :info
 

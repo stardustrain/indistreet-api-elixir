@@ -83,6 +83,8 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/pbkdf2_elixir" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/comeonin" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/pbkdf2_elixir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comeonin" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="phoenix" level="project" />
