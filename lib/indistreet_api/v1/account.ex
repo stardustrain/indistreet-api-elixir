@@ -11,7 +11,7 @@ defmodule IndistreetApi.V1.Account do
     |> Repo.insert
   end
 
-  def get_user!(id) do
+  def get_user_by_id!(id) do
     User
     |> Repo.get!(id)
   end

@@ -5,6 +5,10 @@ defmodule IndistreetApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :authentication do
+    plug IndistreetApi.Plugs.Authentication
+  end
+
   scope "/api", IndistreetApiWeb do
     pipe_through :api
 
@@ -13,6 +17,10 @@ defmodule IndistreetApiWeb.Router do
     end
 
     scope "/admin", Admin, as: "admin" do
+      if Mix.env() !== :test do
+        pipe_through [:authentication]
+      end
+
       resources "/albums", AlbumController, except: [:new, :edit]
       resources "/songs", SongController, except: [:new, :edit]
     end

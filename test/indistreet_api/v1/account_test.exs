@@ -8,10 +8,10 @@ defmodule IndistreetApi.V1.AccountTest do
 
     import IndistreetApi.UserFixture
 
-    test "get_user!/1 return user with id" do
+    test "get_user_by_id!/1 return user with id" do
       user_fixture(%{email: "test@test.com"})
 
-      user = Account.get_user!(1)
+      user = Account.get_user_by_id!(1)
       assert user.id === 1
       assert user.email === "test@test.com"
     end
