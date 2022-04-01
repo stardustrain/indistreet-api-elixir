@@ -17,11 +17,19 @@ defmodule IndistreetApi.V1.AccountTest do
       assert user.email === "test@test.com"
     end
 
-    test "create_user!/1 creates a user with valid data" do
+    test "create_user/1 creates a user with valid data" do
       valid_attrs = %{email: "test@test.com", password: "test1234"}
 
       {:ok, %User{} = user} = Account.create_user(valid_attrs)
       assert user.email === valid_attrs.email
+    end
+
+    test "create_user/1 return error with invalid data" do
+      user_fixture(%{email: "test@test.com"})
+
+      assert {:error, %Ecto.Changeset{}} = Account.create_user()
+      assert {:error, %Ecto.Changeset{}} = Account.create_user(%{email: "test@test.com", password: "test1234"})
+      assert {:error, %Ecto.Changeset{}} = Account.create_user(%{email: "test@test.com", password: "test"})
     end
 
     test "sign_in!/2 return user with valid email and password" do
