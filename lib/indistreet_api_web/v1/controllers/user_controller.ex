@@ -10,6 +10,8 @@ defmodule IndistreetApiWeb.V1.UserController do
     with {:ok, token, _claims} <- Account.sign_in!(email, password) do
       conn
       |> render("signin.json", token: token)
+    else
+      {:error, :unauthorized} -> {:error, :unauthorized, "Unauthorized"}
     end
   end
 

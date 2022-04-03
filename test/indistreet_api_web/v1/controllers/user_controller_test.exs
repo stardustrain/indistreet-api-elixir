@@ -36,21 +36,7 @@ defmodule IndistreetApiWeb.V1.UserControllerTest do
         invalid_attrs
       )
 
-      assert json_response(conn, 401)["errors"] !== %{}
-    end
-  end
-
-  describe "user sign up" do
-    test "should render jwt token with valid attrs", %{conn: conn} do
-      user_attrs = %{email: "test@test.com", password: "test1234"}
-
-      conn = post(
-        conn,
-        Routes.v1_user_path(conn, :signup),
-        user_attrs
-      )
-
-      assert %{"token" => token} = json_response(conn, 201)
+      assert json_response(conn, 401)["errors"]["detail"] === "Unauthorized"
     end
   end
 end
