@@ -3,17 +3,16 @@ defmodule IndistreetApiWeb.Admin.FallbackController do
 
   use Phoenix.Controller
 
-  def call(conn, {:error, :bad_request}) do
-    conn
-    |> put_status(400)
-    |> put_view(IndistreetApiWeb.ErrorView)
-    |> render(:"400")
-  end
+  alias IndistreetApiWeb.ErrorHelpers
 
-  def call(conn, {:error, :unprocessable_entity}) do
+  def call(conn, {:error, status_code, changeset}) do
+    detail = changeset
+    |> Ecto.Changeset.traverse_errors(&ErrorHelpers.translate_error(&1))
+
     conn
-    |> put_status(422)
+    |> put_status(status_code)
     |> put_view(IndistreetApiWeb.ErrorView)
-    |> render(:"422")
+    |> render("error.json", %{detail: detail})
   end
 end
+
