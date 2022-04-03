@@ -3,7 +3,7 @@ defmodule IndistreetApiWeb.V1.UserView do
 
   use IndistreetApiWeb, :view
 
-  def render("signin.json", %{token: token}) do
+  def render("jwt.json", %{token: token}) do
     %{token: token}
   end
 end

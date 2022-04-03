@@ -7,15 +7,17 @@ defmodule IndistreetApiWeb.V1.UserController do
   action_fallback IndistreetApiWeb.FallbackController
 
   def signin(conn, %{"email" => email, "password" => password}) do
-    with {:ok, token, _claims} <- Account.sign_in!(email, password) do
+    with {:ok, token, _claims} <- Account.sign_in(email, password) do
       conn
-      |> render("signin.json", token: token)
-    else
-      {:error, :unauthorized} -> {:error, :unauthorized, "Unauthorized"}
+      |> render("jwt.json", token: token)
     end
   end
 
   def signup(conn, %{"email" => email, "password" => password}) do
-    
+    with {:ok, token, _claims} <- Account.sign_up(%{email: email, password: password}) do
+      conn
+      |> put_status(:created)
+      |> render("jwt.json", token: token)
+    end
   end
 end

@@ -36,7 +36,7 @@ defmodule IndistreetApi.V1.AccountTest do
       valid_attrs = %{email: "test@test.com", password: "test1234"}
       user = user_fixture(valid_attrs)
 
-      {:ok, token, _} = Account.sign_in!(valid_attrs.email, valid_attrs.password)
+      {:ok, token, _} = Account.sign_in(valid_attrs.email, valid_attrs.password)
       {:ok, claims} = Guardian.decode_and_verify(token)
 
       assert claims["sub"] === user.id |> to_string
