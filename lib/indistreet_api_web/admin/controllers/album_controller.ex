@@ -13,7 +13,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
       |> put_status(:created)
       |> render("show.json", album: album)
     else
-      {:error, %Ecto.Changeset{}} -> {:error, :bad_request}
+      {:error, %Ecto.Changeset{} = changeset} -> {:error, :bad_request, changeset}
     end
   end
 
@@ -36,7 +36,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
       conn
       |> render("show.json", album: album)
     else
-      {:error, %Ecto.Changeset{}} -> {:error, :unprocessable_entity}
+      {:error, %Ecto.Changeset{} = changeset} -> {:error, :unprocessable_entity, changeset}
     end
   end
 
@@ -46,7 +46,7 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
       conn
       |> render("show.json", album: album)
     else
-      {:error, %Ecto.Changeset{}} -> {:error, :bad_request}
+      {:error, %Ecto.Changeset{} = changeset} -> {:error, :bad_request, changeset}
     end
   end
 end
