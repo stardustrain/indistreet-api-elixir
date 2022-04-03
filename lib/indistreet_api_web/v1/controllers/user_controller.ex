@@ -3,6 +3,7 @@ defmodule IndistreetApiWeb.V1.UserController do
 
   use IndistreetApiWeb, :controller
   alias IndistreetApi.V1.Account
+  alias IndistreetApi.Guardian
 
   action_fallback IndistreetApiWeb.FallbackController
 
@@ -19,5 +20,12 @@ defmodule IndistreetApiWeb.V1.UserController do
       |> put_status(:created)
       |> render("jwt.json", token: token)
     end
+  end
+
+  def me(conn, _) do
+    user = Guardian.Plug.current_resource(conn)
+
+    conn
+    |> render("me.json", user: user)
   end
 end

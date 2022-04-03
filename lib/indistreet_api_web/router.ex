@@ -18,6 +18,12 @@ defmodule IndistreetApiWeb.Router do
       post "/signup", UserController, :signup
     end
 
+    scope "/v1", V1, as: "v1" do
+      pipe_through [:authentication]
+
+      get "/me", UserController, :me
+    end
+
     scope "/admin", Admin, as: "admin" do
 #      if Mix.env() !== :test do
 #        pipe_through [:authentication]

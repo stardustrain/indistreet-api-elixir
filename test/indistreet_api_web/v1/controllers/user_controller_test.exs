@@ -6,19 +6,20 @@ defmodule IndistreetApiWeb.V1.UserControllerTest do
   import IndistreetApi.UserFixture
   alias IndistreetApi.Guardian
 
+  @user_attrs %{email: "test@test.com", password: "test1234"}
+
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
   describe "user sign in" do
-    test "should render jwt token with valid user", %{conn: conn} do
-      user_attrs = %{email: "test@test.com", password: "test1234"}
-      user = user_fixture(user_attrs)
+    setup [:create_user]
 
+    test "should render jwt token with valid user", %{conn: conn, user: user} do
       conn = post(
         conn,
         Routes.v1_user_path(conn, :signin),
-        user_attrs
+        @user_attrs
       )
 
       %{"token" => token} = json_response(conn, 200)
@@ -58,5 +59,47 @@ defmodule IndistreetApiWeb.V1.UserControllerTest do
       conn = post(conn, Routes.v1_user_path(conn, :signup), %{email: "", password: ""})
       assert json_response(conn, 400)
     end
+  end
+
+  describe "retrieve user" do
+    setup [:create_user]
+
+    test "should render user information with valid jwt token", %{conn: conn} do
+      login_response = post(
+        conn,
+        Routes.v1_user_path(conn, :signin),
+        @user_attrs
+      )
+
+      %{"token" => token} = json_response(login_response, 200)
+
+      conn = conn |> put_req_header("authorization", "Bearer #{token}")
+      conn = get(
+        conn,
+        Routes.v1_user_path(conn, :me)
+      )
+
+      assert json_response(conn, 200)
+      keys = json_response(conn, 200) |> Map.keys
+
+      assert keys
+             |> Enum.all?(fn key -> Enum.member?(["id", "email", "inserted_at", "updated_at"], key)  end)
+      refute keys
+             |> Enum.all?(fn key -> Enum.member?(["is_admin", "is_super_user"], key)  end)
+    end
+
+    test "should render 401 with invalid jwt token", %{conn: conn} do
+      conn = get(
+        conn,
+        Routes.v1_user_path(conn, :me)
+      )
+
+      assert json_response(conn, 401)
+    end
+  end
+
+  defp create_user(_) do
+    user = user_fixture(@user_attrs)
+    %{user: user}
   end
 end
