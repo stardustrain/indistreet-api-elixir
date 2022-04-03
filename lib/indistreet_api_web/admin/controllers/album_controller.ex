@@ -12,8 +12,6 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
       conn
       |> put_status(:created)
       |> render("show.json", album: album)
-    else
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, :bad_request, changeset}
     end
   end
 
@@ -45,8 +43,6 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
     with {:ok, %Album{} = album} <- Music.delete_album(album) do
       conn
       |> render("show.json", album: album)
-    else
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, :bad_request, changeset}
     end
   end
 end
