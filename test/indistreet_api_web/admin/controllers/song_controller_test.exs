@@ -1,16 +1,7 @@
 defmodule IndistreetApiWeb.Admin.SongControllerTest do
-  use IndistreetApiWeb.ConnCase
+  use IndistreetApiWeb.AdminConnCase
 
   import IndistreetApi.SongFixture
-  import IndistreetApi.UserFixture
-
-  setup %{conn: conn} do
-    token = admin_user_token_fixture()
-    conn = conn
-           |> put_req_header("accept", "application/json")
-           |> put_req_header("authorization", "Bearer #{token}")
-    {:ok, conn: conn}
-  end
 
   describe "retrieve song" do
     setup [:create_song]

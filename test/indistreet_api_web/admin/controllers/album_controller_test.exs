@@ -1,16 +1,7 @@
 defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
-  use IndistreetApiWeb.ConnCase
+  use IndistreetApiWeb.AdminConnCase
 
   import IndistreetApi.AlbumFixture
-  import IndistreetApi.UserFixture
-
-  setup %{conn: conn} do
-    token = admin_user_token_fixture()
-    conn = conn
-           |> put_req_header("accept", "application/json")
-           |> put_req_header("authorization", "Bearer #{token}")
-    {:ok, conn: conn}
-  end
 
   describe "create album" do
     test "should render created album when data is valid", %{conn: conn} do
