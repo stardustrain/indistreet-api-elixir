@@ -9,7 +9,8 @@ defmodule IndistreetApiWeb.Router do
     plug IndistreetApi.Plugs.Authentication
   end
 
-  pipeline :authorization do
+  pipeline :ensure_admin do
+    plug IndistreetApi.Plugs.Authentication
     plug IndistreetApi.Plugs.Authorization
   end
 
@@ -23,13 +24,13 @@ defmodule IndistreetApiWeb.Router do
     end
 
     scope "/v1", V1, as: "v1" do
-      pipe_through [:authentication]
+      pipe_through :authentication
 
       get "/me", UserController, :me
     end
 
     scope "/admin", Admin, as: "admin" do
-      pipe_through [:authentication, :authorization]
+      pipe_through :ensure_admin
 
       resources "/albums", AlbumController, except: [:new, :edit]
       resources "/songs", SongController, except: [:new, :edit]
