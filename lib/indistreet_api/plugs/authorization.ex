@@ -13,9 +13,11 @@ defmodule IndistreetApi.Plugs.Authorization do
     if (user.is_admin) do
       conn
     else
+      body = ErrorView.template_not_found("403.json", "") |> Jason.encode!
+
       conn
       |> put_resp_content_type("application/json")
-      |> send_resp(:forbidden, Jason.encode!(ErrorView.template_not_found("403.json", "")))
+      |> send_resp(:forbidden, body)
       |> halt
     end
   end
