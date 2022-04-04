@@ -5,8 +5,6 @@ defmodule IndistreetApi.Admin.AccountTest do
   import IndistreetApi.UserFixture
 
   describe "users" do
-    alias IndistreetApi.Model.Account.User
-
     test "toggle_user_authorization/1 toggle is_admin flag for user" do
       %{user: user} = create_user()
 
