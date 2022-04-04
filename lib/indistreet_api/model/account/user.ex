@@ -4,6 +4,7 @@ defmodule IndistreetApi.Model.Account.User do
   use IndistreetApi.Schema
   import Pbkdf2, only: [hash_pwd_salt: 1]
 
+  @derive {Jason.Encoder, except: [:__meta__, :password, :password_confirmation, :password_hash]}
   schema "users" do
     field :email, :string
     field :password_hash, :string
