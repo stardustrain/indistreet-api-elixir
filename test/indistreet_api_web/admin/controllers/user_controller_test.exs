@@ -35,6 +35,18 @@ defmodule IndistreetApiWeb.Admin.UserControllerTest do
 
       assert json_response(conn, 401)
     end
+
+    test "should render 403 error if not a admin user token", %{conn: conn, user: user} do
+      {:ok, token, _claims} = Guardian.encode_and_sign(user)
+      conn = conn |> put_req_header("authorization", "Bearer #{token}")
+
+      conn = patch(
+        conn,
+        Routes.admin_user_path(conn, :toggle_user_authorization, user.id)
+      )
+
+      assert json_response(conn, 403)["errors"] === %{"detail" => "Forbidden"}
+    end
   end
 
   defp create_user(_) do
