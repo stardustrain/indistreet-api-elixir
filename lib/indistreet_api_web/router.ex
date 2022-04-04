@@ -31,6 +31,7 @@ defmodule IndistreetApiWeb.Router do
 
       resources "/albums", AlbumController, except: [:new, :edit]
       resources "/songs", SongController, except: [:new, :edit]
+      patch "/toggle-user-authorization/:id", UserController, :toggle_user_authorization
     end
   end
 

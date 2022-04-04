@@ -12,4 +12,17 @@ defmodule IndistreetApi.UserFixture do
 
     user
   end
+
+  def admin_user_fixture(attrs \\ %{}) do
+    {:ok, admin} =
+      attrs
+      |> Enum.into(%{
+        email: "admin@test.com",
+        password: "test1234",
+        is_admin: true
+      })
+      |> IndistreetApi.V1.Account.create_user
+
+      admin
+  end
 end
