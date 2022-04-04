@@ -2,9 +2,14 @@ defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
   use IndistreetApiWeb.ConnCase
 
   import IndistreetApi.AlbumFixture
+  import IndistreetApi.UserFixture
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    token = admin_user_token_fixture()
+    conn = conn
+           |> put_req_header("accept", "application/json")
+           |> put_req_header("authorization", "Bearer #{token}")
+    {:ok, conn: conn}
   end
 
   describe "create album" do

@@ -25,9 +25,7 @@ defmodule IndistreetApiWeb.Router do
     end
 
     scope "/admin", Admin, as: "admin" do
-#      if Mix.env() !== :test do
-#        pipe_through [:authentication]
-#      end
+      pipe_through [:authentication]
 
       resources "/albums", AlbumController, except: [:new, :edit]
       resources "/songs", SongController, except: [:new, :edit]

@@ -1,6 +1,8 @@
 defmodule IndistreetApi.UserFixture do
   @moduledoc false
 
+  alias IndistreetApi.Guardian
+
   def user_fixture(attrs \\ %{}) do
     {:ok, user} =
       attrs
@@ -24,5 +26,12 @@ defmodule IndistreetApi.UserFixture do
       |> IndistreetApi.V1.Account.create_user
 
       admin
+  end
+
+  def admin_user_token_fixture(attrs \\ %{}) do
+    admin = admin_user_fixture()
+    {:ok, token, _claims} = Guardian.encode_and_sign(admin)
+
+    token
   end
 end
