@@ -5,7 +5,8 @@ defmodule IndistreetApiWeb.ErrorViewTest do
   import Phoenix.View
 
   test "renders error.json" do
-    assert render(IndistreetApiWeb.ErrorView, "error.json", %{detail: ["Error reason"]}) === %{errors: ["Error reason"]}
+    assert render(IndistreetApiWeb.ErrorView, "error.json", %{detail: ["Error reason"]})
+           === %{errors: %{detail: ["Error reason"]}}
   end
 
   test "renders 404.json" do

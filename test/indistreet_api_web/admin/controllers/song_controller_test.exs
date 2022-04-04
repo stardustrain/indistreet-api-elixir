@@ -1,11 +1,7 @@
 defmodule IndistreetApiWeb.Admin.SongControllerTest do
-  use IndistreetApiWeb.ConnCase
+  use IndistreetApiWeb.AdminConnCase
 
   import IndistreetApi.SongFixture
-
-  setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
-  end
 
   describe "retrieve song" do
     setup [:create_song]

@@ -37,6 +37,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :indistreet_api, IndistreetApi.Guardian,
+  issuer: "indistreet_api",
+  secret_key: "secret_key"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

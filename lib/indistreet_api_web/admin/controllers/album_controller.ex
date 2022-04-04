@@ -5,15 +5,13 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
   alias IndistreetApi.Model.Music.Album
   alias Utils.Pagination
 
-  action_fallback IndistreetApiWeb.Admin.FallbackController
+  action_fallback IndistreetApiWeb.FallbackController
 
   def create(conn, %{"album" => album_params}) do
     with {:ok, %Album{} = album} <- Music.create_album(album_params) do
       conn
       |> put_status(:created)
       |> render("show.json", album: album)
-    else
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, :bad_request, changeset}
     end
   end
 
@@ -45,8 +43,6 @@ defmodule IndistreetApiWeb.Admin.AlbumController do
     with {:ok, %Album{} = album} <- Music.delete_album(album) do
       conn
       |> render("show.json", album: album)
-    else
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, :bad_request, changeset}
     end
   end
 end

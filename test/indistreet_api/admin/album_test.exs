@@ -25,7 +25,7 @@ defmodule IndistreetApi.Admin.AlbumTest do
       assert album.description == "Test description"
     end
 
-    test "create_album/1 throw error with invalid data" do
+    test "create_album/1 return error with invalid data" do
       assert {:error, %Ecto.Changeset{}} = Music.create_album()
       assert {:error, %Ecto.Changeset{}} = Music.create_album(%{name: "Test name"})
       assert {:error, %Ecto.Changeset{}} = Music.create_album(%{name: 111, album_type: "SINGLE", description: ""})

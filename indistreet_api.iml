@@ -77,6 +77,14 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/credo" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/file_system" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/bunt" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/guardian" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/guardian" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/pbkdf2_elixir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/comeonin" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/pbkdf2_elixir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comeonin" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="phoenix" level="project" />
@@ -138,5 +146,16 @@
     <orderEntry type="library" name="file_system" level="project" />
     <orderEntry type="library" name="bunt" level="project" />
     <orderEntry type="library" name="inch_ex" level="project" />
+    <orderEntry type="library" name="guardian" level="project" />
+    <orderEntry type="library" name="jose" level="project" />
+    <orderEntry type="library" name="jsone" level="project" />
+    <orderEntry type="library" name="jsx" level="project" />
+    <orderEntry type="library" name="libdecaf" level="project" />
+    <orderEntry type="library" name="libsodium" level="project" />
+    <orderEntry type="library" name="ojson" level="project" />
+    <orderEntry type="library" name="poison" level="project" />
+    <orderEntry type="library" name="guardian_phoenix" level="project" />
+    <orderEntry type="library" name="comeonin" level="project" />
+    <orderEntry type="library" name="pbkdf2_elixir" level="project" />
   </component>
 </module>

@@ -7,7 +7,7 @@ defmodule IndistreetApiWeb.ErrorView do
   #   "Wow"
   # end
   def render("error.json", %{detail: detail}) do
-    %{errors: detail}
+    %{errors: %{detail: detail}}
   end
 
   # By default, Phoenix returns the status message from

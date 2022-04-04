@@ -5,16 +5,36 @@ defmodule IndistreetApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :authentication do
+    plug IndistreetApi.Plugs.Authentication
+  end
+
+  pipeline :ensure_admin do
+    plug IndistreetApi.Plugs.Authentication
+    plug IndistreetApi.Plugs.Authorization
+  end
+
   scope "/api", IndistreetApiWeb do
     pipe_through :api
 
     scope "/v1", V1, as: "v1" do
       resources "/albums", AlbumController, only: [:index, :show]
+      post "/signin", UserController, :signin
+      post "/signup", UserController, :signup
+    end
+
+    scope "/v1", V1, as: "v1" do
+      pipe_through :authentication
+
+      get "/me", UserController, :me
     end
 
     scope "/admin", Admin, as: "admin" do
+      pipe_through :ensure_admin
+
       resources "/albums", AlbumController, except: [:new, :edit]
       resources "/songs", SongController, except: [:new, :edit]
+      patch "/toggle-user-authorization/:id", UserController, :toggle_user_authorization
     end
   end
 

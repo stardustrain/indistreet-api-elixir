@@ -1,11 +1,7 @@
 defmodule IndistreetApiWeb.Admin.AlbumControllerTest do
-  use IndistreetApiWeb.ConnCase
+  use IndistreetApiWeb.AdminConnCase
 
   import IndistreetApi.AlbumFixture
-
-  setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
-  end
 
   describe "create album" do
     test "should render created album when data is valid", %{conn: conn} do
