@@ -51,7 +51,7 @@ defmodule IndistreetApi.Admin.Music do
     |> Repo.insert()
   end
 
-  def list_song(attrs \\ %{}) do
+  def list_song(attrs) do
     offset = attrs.offset
     page = attrs.page
     album_id = Map.get(attrs, :album_id)

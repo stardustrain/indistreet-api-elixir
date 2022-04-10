@@ -9,6 +9,7 @@ defmodule PaginationTest do
 
   test "should return default option when receive empty option.", context do
     assert get_pagination_option(%{}) == context[:default_option]
+    assert get_pagination_option(%{page: nil, offset: nil}) == context[:default_option]
   end
 
   test "should return merged option when receiving partial option.", context do

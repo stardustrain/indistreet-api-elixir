@@ -46,7 +46,6 @@ defmodule IndistreetApi.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:guardian, "~> 2.0"},
-      {:comeonin, "~> 5.3"},
       {:pbkdf2_elixir, "~> 2.0"}
     ]
   end

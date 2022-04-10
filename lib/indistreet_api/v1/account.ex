@@ -1,8 +1,7 @@
 defmodule IndistreetApi.V1.Account do
   @moduledoc false
 
-  import Ecto.Query
-  import Pbkdf2, only: [hash_pwd_salt: 1, check_pass: 2]
+  import Pbkdf2, only: [check_pass: 2]
   alias IndistreetApi.Repo
   alias IndistreetApi.Model.Account.User
   alias IndistreetApi.Guardian
@@ -18,9 +17,9 @@ defmodule IndistreetApi.V1.Account do
     |> Repo.get!(id)
   end
 
-  def get_user_by_email(email) do
+  defp get_user_by_email(email) do
     case User |> Repo.get_by(email: email) do
-      nil -> :error
+      nil -> {:error, :notfound}
       user -> {:ok, user}
     end
   end
@@ -30,7 +29,7 @@ defmodule IndistreetApi.V1.Account do
          {:ok, user} <- check_pass(user, password) do
       Guardian.encode_and_sign(user)
     else
-      :error -> {:error, :unauthorized}
+      {:error, _reason} -> {:error, :unauthorized}
     end
   end
 
