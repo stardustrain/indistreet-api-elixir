@@ -56,7 +56,15 @@ defmodule IndistreetApiWeb.V1.UserControllerTest do
     end
 
     test "should render 400 with invalid attributes", %{conn: conn} do
+      create_user(nil)
+
       conn = post(conn, Routes.v1_user_path(conn, :signup), %{email: "", password: ""})
+      assert json_response(conn, 400)
+
+      conn = post(conn, Routes.v1_user_path(conn, :signup), %{email: "other-mail@test.com", password: "짧은암호"})
+      assert json_response(conn, 400)
+
+      conn = post(conn, Routes.v1_user_path(conn, :signup), @user_attrs)
       assert json_response(conn, 400)
     end
   end

@@ -29,7 +29,7 @@ defmodule IndistreetApi.UserFixture do
   end
 
   def admin_user_token_fixture(attrs \\ %{}) do
-    admin = admin_user_fixture()
+    admin = admin_user_fixture(attrs)
     {:ok, token, _claims} = Guardian.encode_and_sign(admin)
 
     token
