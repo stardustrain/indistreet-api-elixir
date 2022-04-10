@@ -1,8 +1,8 @@
-defmodule IndistreetApi.ErrorHandlers.AuthErrorHandler do
+defmodule IndistreetApi.AuthErrorHandler do
   @moduledoc false
 
   import Plug.Conn
-  
+
   @behaviour Guardian.Plug.ErrorHandler
 
   @impl Guardian.Plug.ErrorHandler
