@@ -23,6 +23,6 @@ defmodule IndistreetApi.Model.Music.Album do
     |> cast(attrs, [:name, :album_type, :description])
     |> validate_required([:name, :album_type])
     |> validate_inclusion(:album_type, @album_types)
-    |> cast_assoc(:songs)
+    |> cast_assoc(:songs, with: &Song.changeset/2)
   end
 end
