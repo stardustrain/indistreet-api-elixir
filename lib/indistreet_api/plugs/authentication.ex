@@ -4,7 +4,7 @@ defmodule IndistreetApi.Plugs.Authentication do
   use Guardian.Plug.Pipeline,
       otp_app: :indistreet_api,
       module: IndistreetApi.Guardian,
-      error_handler: IndistreetApi.ErrorHandlers.AuthErrorHandler
+      error_handler: IndistreetApi.AuthErrorHandler
 
   plug Guardian.Plug.VerifyHeader, claims: %{"typ" => "access"}
   plug Guardian.Plug.LoadResource
