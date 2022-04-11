@@ -25,6 +25,17 @@ defmodule IndistreetApi.Admin.AlbumTest do
       assert album.description == "Test description"
     end
 
+    test "create_album/1 creates a album with song data" do
+      songs_attrs = [
+        %{name: "Track 1"},
+        %{name: "Track 2"},
+      ]
+      album_attrs = %{name: "Test name", album_type: "SINGLE", description: "Test description", songs: songs_attrs}
+
+      assert {:ok, %Album{} = album} = Music.create_album(album_attrs)
+      assert album.songs |> Enum.map(fn song -> %{name: song.name} end) === songs_attrs
+    end
+
     test "create_album/1 return error with invalid data" do
       assert {:error, %Ecto.Changeset{}} = Music.create_album()
       assert {:error, %Ecto.Changeset{}} = Music.create_album(%{name: "Test name"})
